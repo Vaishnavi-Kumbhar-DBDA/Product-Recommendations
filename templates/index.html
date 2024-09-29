@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="background">
+        <div class="content">
+            <h1>Recommendations</h1>
+            <form method="POST">
+                <label for="user_id">User ID:</label>
+                <input type="number" name="user_id" id="user_id" required>
+                <button type="submit">Get Recommendations</button>
+            </form>
+            {% if recommendations is not none and not recommendations.empty %}
+                <h2>Recommended Products:</h2>
+                <ul>
+                    {% for index, row in recommendations.iterrows() %}
+                        <li>Product ID: {{ row['ProductId'] }} - Score: {{ row['Score'] }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
